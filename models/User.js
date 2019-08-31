@@ -20,9 +20,6 @@ const UserSchema = new Schema({
         default : Date.now
     },
      todos: [{
-        user_id:{
-            type:String
-        },
         content:{
             type:String
         },
