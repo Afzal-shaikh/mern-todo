@@ -8,6 +8,7 @@ const passport = require("passport");
 // load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const validateTodoInput = require("../../validation/todo")
 
 // load user model
 const user = require("../../models/User");
@@ -18,7 +19,7 @@ const user = require("../../models/User");
 
 router.get("/test", (req, res) => res.json({ msg: "USers works" }));
 
-// route GET api/users/register
+// route POST api/users/register
 //  Register user
 //  access Public
 
@@ -64,11 +65,11 @@ router.post("/login", (req, res) => {
     currently put on hold
 */
 
-  // const{errors,isValid} =  validateLoginInput(req.body);
-  // // checking validation
-  // if(!isValid){
-  //     return res.status(400).json(errors);
-  // }
+  const{errors,isValid} =  validateLoginInput(req.body);
+  // checking validation
+  if(!isValid){
+      return res.status(400).json(errors);
+  }
 
   const email = req.body.email;
   const password = req.body.password;
@@ -147,17 +148,16 @@ router.delete(
 //  add a todo-item
 //  access Private
 
-router.post(
-  "/add-todo",
+router.post("/add-todo",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    //   const { errors, isValid } = validateTodoInput(req.body);
+      const { errors, isValid } = validateTodoInput(req.body);
 
     // Check Validation
-    //   if (!isValid) {
+      if (!isValid) {
     // Return any errors with 400 status
-    // return res.status(400).json(errors);
-    //   }
+    return res.status(400).json(errors);
+      }
     
     User.findOne({ email: req.user.email }).then(user => {
 
