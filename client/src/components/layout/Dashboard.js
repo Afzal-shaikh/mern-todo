@@ -6,7 +6,7 @@ import axios from 'axios';
     constructor(){
         super();
         this.state={
-           content : ''
+           todo : ''
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -21,8 +21,9 @@ import axios from 'axios';
         const newTodo={
            content:this.state.content
         }
-        axios.post('/api/user/add-todo',newTodo)
+        axios.post('/api/todo/add-todo',newTodo)
         .then(res => console.log(res.data))
+        
         .catch(err=> console.log(err));
     }
 
@@ -35,6 +36,8 @@ import axios from 'axios';
               <div className="row">
                 <div className="col-md-8 m-auto">
                   <h1 className="display-4 text-center">Add-TODO</h1>
+
+
                   <form onSubmit={this.onSubmit}>
 
 
