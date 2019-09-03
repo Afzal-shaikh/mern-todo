@@ -1,5 +1,5 @@
 import {SET_CURRENT_USER} from '../actions/types'
-import isEmpty from '../validation/is-empty'
+// import isEmpty from '../validation/is-empty'
 
 const initialState = {
     isAuthenticated : false ,
@@ -20,4 +20,11 @@ export default function(state = initialState , action){
         return state;
     }
 
+}
+const isEmpty = (value) =>{
+    return(value===undefined || value === null ||
+         (typeof value=== 'object' && Object.keys(value).length===0 )||
+         (typeof value === 'string' && value.trim().length === 0)
+         
+         )
 }
