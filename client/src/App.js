@@ -12,6 +12,9 @@ import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import Dashboard from './components/layout/Dashboard'
+
+import PrivateRoute from './components/common/PrivateRoute'
 
 import './App.css';
 
@@ -47,6 +50,7 @@ class App extends Component {
             <div className="container">
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </div>
             <Footer />
           </div>

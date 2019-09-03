@@ -1,64 +1,36 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import TodoForm from './TodoForm';
+import TodoList from './TodoList';
 
- class Dashboard extends Component {
 
-    constructor(){
-        super();
-        this.state={
-           todo : ''
-        }
-        this.onChange = this.onChange.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
-    }
-
-    onChange(e){
-        this.setState({[e.target.name ]:e.target.value});
-    }
-    onSubmit(e){
-        e.preventDefault();
-
-        const newTodo={
-           content:this.state.content
-        }
-        axios.post('/api/todo/add-todo',newTodo)
-        .then(res => console.log(res.data))
-        
-        .catch(err=> console.log(err));
-    }
-
+class Dashboard extends Component {
     render() {
+
+         
+        console.log(this.props.auth)
         return (
             <div>
-
-<div className="register  ">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-8 m-auto">
-                  <h1 className="display-4 text-center">Add-TODO</h1>
-
-
-                  <form onSubmit={this.onSubmit}>
-
-
-                    <div className="form-group">
-                      <input type="text"
-                       className="form-control form-control-lg" 
-                       placeholder="Add a new Todo" name="todo"
-                        value={this.state.todo}
-                        onChange={this.onChange}
-                         />
-                    </div>
-
-                    <input type="submit" className="btn btn-info btn-block mt-2" value="Add"/>
-                </form>
-               </div>
-               </div>
-               </div>
-               </div> 
+               
+                <h1>Dashboard</h1>
+                <h1></h1>
+                <TodoForm  />
+                <TodoList />
             </div>
         )
     }
 }
 
-export default Dashboard
+Dashboard.propTypes = {
+  
+    auth: PropTypes.object.isRequired,
+    
+  };
+
+
+const mapStateToProps = state => ({
+    auth: state.auth
+  });
+
+export default connect(mapStateToProps)(Dashboard);

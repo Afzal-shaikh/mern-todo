@@ -17,7 +17,7 @@ router.delete(
     (req, res) => {
 
       // User.findByIdAndDelete(req.user.id)
-      User.findOne({ email: req.user.email })
+      User.findOne({ id: req.user.id })
         .then(user => {
           // Get remove index
           const removeIndex = user.todos
@@ -44,11 +44,11 @@ router.post("/add-todo",
   (req, res) => {
       const { errors, isValid } = validateTodoInput(req.body);
 
-    // // Check Validation
-    //   if (!isValid) {
-    // // Return any errors with 400 status
-    // return res.status(400).json(errors);
-    //   }
+    // Check Validation
+      if (!isValid) {
+    // Return any errors with 400 status
+    return res.status(400).json(errors);
+      }
     
     User.findOne({ email: req.user.email }).then(user => {
 

@@ -121,7 +121,7 @@ class Register extends Component {
                     <div className="invalid-feedback">{errors.password2}</div>
                   )}
                 </div>
-                <input type="submit"  value = "Sign Up"className="btn btn-info btn-block mt-4" />
+                <input type="submit"  value = "Sign Up" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
           </div>
