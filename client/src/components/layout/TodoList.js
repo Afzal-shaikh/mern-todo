@@ -10,35 +10,34 @@ class Todo extends Component {
   }
 
   render() {
-      const Todo= ''
-    // const Todo =  this.props.todos.map(todo =>
-    //      (
-    //   <tr key={todo._id}>
-    //     <td>{todo.company}</td>
-    //     <td>{todo.title}</td>
-    //     <td>
-    //       <button
-    //         onClick={this.onDeleteClick.bind(this, todo._id)}
-    //         className="btn btn-danger"
-    //       >
-    //         Delete
-    //       </button>
-    //     </td>
-    //   </tr>
-    // ));
+    //   const Todo= 'abc'
+    const todo =  this.props.todos.map(todo =>
+         (
+      <tr key={todo._id}>
+        <td>{todo.content}</td>
+        <td>{todo.status}</td>
+        <td>
+          <button
+            onClick={this.onDeleteClick.bind(this, todo._id)}
+            className="btn btn-danger"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    ));
     return (
       <div>
-        <h4 className="mb-4">Todo </h4>
+        <h4 className="mb-4">Todos List </h4>
         <table className="table">
-          <thead>
+         
             <tr>
               <th>Todo</th>
               <th>Status</th>
-              <th></th>
               <th />
             </tr>
             {Todo}
-          </thead>
+         
         </table>
       </div>
     );
@@ -48,5 +47,7 @@ class Todo extends Component {
 Todo.propTypes = {
   deleteTodo: PropTypes.func.isRequired
 };
+
+
 
 export default connect(null, { deleteTodo })(Todo);

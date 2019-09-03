@@ -62,8 +62,10 @@ class Login extends Component {
                     onChange={this.onChange}
                   />
                   
+                  {errors.content && (
+                    <div className="invalid-feedback">{errors.content}</div>
+                  )}
                 </div>
-    
                 <input type="submit" value="Add todo" className="btn btn-info btn-block mt-4" />
               </form>
             </div>

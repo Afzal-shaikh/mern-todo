@@ -1,7 +1,42 @@
 
 
 
-const validateTodoInput = require("../../validation/todo")
+const validate = require("../../validation/todo")
+
+
+// route POST api/users/add-todo
+//  add a todo-item
+//  access Private
+
+router.post("/add-todo",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+      const { errors, isValid } = validateTodoInput(req.body);
+
+    // Check Validation
+      if (!isValid) {
+    // Return any errors with 400 status
+    return res.status(400).json(errors);
+      }
+    
+    User.findOne({ email: req.user.email }).then(user => {
+
+      const newTodo = {
+        content: req.body.content
+      };
+
+      // Add to Todos array
+      user.todos.unshift(newTodo);
+     
+      
+
+      user.save().then(user => res.json(user.todos));
+    });
+  }
+);
+
+
+
 
 
 
@@ -35,33 +70,3 @@ router.delete(
   );
 
 
-// route POST api/users/add-todo
-//  add a todo-item
-//  access Private
-
-router.post("/add-todo",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-      const { errors, isValid } = validateTodoInput(req.body);
-
-    // Check Validation
-      if (!isValid) {
-    // Return any errors with 400 status
-    return res.status(400).json(errors);
-      }
-    
-    User.findOne({ email: req.user.email }).then(user => {
-
-      const newTodo = {
-        content: req.body.content
-      };
-
-      // Add to Todos array
-      user.todos.unshift(newTodo);
-     
-      
-
-      user.save().then(user => res.json(user.todos));
-    });
-  }
-);

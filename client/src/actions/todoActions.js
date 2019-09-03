@@ -8,8 +8,8 @@ import {
 // / Add Todo
 export const addTodo = (todoData, history) => dispatch => {
   axios
-    .post('/add-todo', todoData)
-    .then(res => history.push('/dashboard'))
+    .post('api/users/add-todo', todoData)
+    .then(res =>res.json(todoData))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -18,13 +18,11 @@ export const addTodo = (todoData, history) => dispatch => {
     );
 };
 
-// Delete Experience
+// Delete Todo
 export const deleteTodo = id => dispatch => {
   axios
-    .delete(`/api/todo/todos/${id}`)
-    .then(res =>
-        console.log(res.data)
-    )
+    .delete(`/api/todo/todos/:${id}`)
+    .then(res => window.location('/dashboard'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

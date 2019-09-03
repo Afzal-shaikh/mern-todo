@@ -12,9 +12,6 @@ class Dashboard extends Component {
         console.log(this.props.auth)
         return (
             <div>
-               
-                <h1>Dashboard</h1>
-                <h1></h1>
                 <TodoForm  />
                 <TodoList />
             </div>

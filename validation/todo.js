@@ -7,7 +7,7 @@ module.exports = function validateTodoInput(data) {
   data.title = !isEmpty(data.content) ? data.content : '';
 
   if (Validator.isEmpty(data.content)) {
-    errors.from = 'todo field is required';
+    errors.todo = 'todo field is required';
   }
 
   return {
