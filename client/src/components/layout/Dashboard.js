@@ -9,7 +9,7 @@ class Dashboard extends Component {
     render() {
 
          
-        console.log(this.props.auth)
+        // console.log(this.props.auth)
         return (
             <div>
                 <TodoForm  />

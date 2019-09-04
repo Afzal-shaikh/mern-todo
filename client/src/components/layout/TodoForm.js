@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { addTodo } from '../../actions/todoActions';
 
-class Login extends Component {
+class TodoForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -34,6 +34,7 @@ class Login extends Component {
     };
 
     this.props.addTodo(todoData,this.props.history);
+    this.setState({content :''})
   }
 
   onChange(e) {
@@ -44,7 +45,7 @@ class Login extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="login">
+      <div className="TodoForm">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -76,7 +77,7 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
+TodoForm.propTypes = {
   addTodo: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
@@ -87,4 +88,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { addTodo })(Login);
+export default connect(mapStateToProps, { addTodo })(TodoForm);

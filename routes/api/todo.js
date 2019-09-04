@@ -69,4 +69,10 @@ router.delete(
     }
   );
 
+router.get("/todlist",passport.authenticate(jwt,{session:false}),
 
+    (req,res) => {
+      
+    }
+
+)

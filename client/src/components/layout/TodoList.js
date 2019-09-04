@@ -1,53 +1,42 @@
-import React, { Component } from 'react';
-import { deleteTodo } from '../../actions/todoActions';
+import React, { Component } from 'react'
+import { fetchTodoList } from '../../actions/todoActions';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';;
+
+class TodoList extends Component {
 
 
-class Todo extends Component {
-  onDeleteClick(id) {
-    this.props.deleteTodo(id);
+  constructor(){
+    super();
+    this.state={
+      todos:[]
+    }
+  }
+
+  componentDidMount(){
+    const todoData = fetchTodoList(this.props.auth.user.id)
+    console.log(todoData)
   }
 
   render() {
-    //   const Todo= 'abc'
-    const todo =  this.props.todos.map(todo =>
-         (
-      <tr key={todo._id}>
-        <td>{todo.content}</td>
-        <td>{todo.status}</td>
-        <td>
-          <button
-            onClick={this.onDeleteClick.bind(this, todo._id)}
-            className="btn btn-danger"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    ));
     return (
       <div>
-        <h4 className="mb-4">Todos List </h4>
-        <table className="table">
-         
-            <tr>
-              <th>Todo</th>
-              <th>Status</th>
-              <th />
-            </tr>
-            {Todo}
-         
-        </table>
+        <h1>todolist</h1>
       </div>
-    );
+    )
   }
 }
 
-Todo.propTypes = {
-  deleteTodo: PropTypes.func.isRequired
+
+TodoList.propTypes = {
+  fetchTodoList: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
 
-
-export default connect(null, { deleteTodo })(Todo);
+export default connect(mapStateToProps, { fetchTodoList })(TodoList);

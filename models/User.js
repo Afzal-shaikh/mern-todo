@@ -23,6 +23,9 @@ const UserSchema = new Schema({
         content:{
             type:String
         },
+        completed:{
+            type:Boolean   
+        },
         date:{
             type: Date,
             default : Date.now

@@ -9,7 +9,7 @@ import {
 export const addTodo = (todoData, history) => dispatch => {
   axios
     .post('api/users/add-todo', todoData)
-    .then(res =>res.json(todoData))
+    .then(res =>{history.push('/dashboard'); })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -30,3 +30,17 @@ export const deleteTodo = id => dispatch => {
       })
     );
 };
+
+
+// get todolist
+export const fetchTodoList = id => dispatch => {
+    axios 
+    .get('/api/users/todolist')
+    .then(res=> {res.json(res.data); })
+    .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      );
+}

@@ -117,21 +117,18 @@ router.post("/login", (req, res) => {
   });
 });
 
-// route GET api/users/current
+// route GET api/users/todoList
 //  Return current user
 //  access Private
 
 router.get(
-  "/current",
+  "/todolist",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     res.json({
-      id: req.user.id,
-      name: req.user.name,
-      email: req.user.email,
       todos: req.user.todos
     });
-    console.log(req.user)
+    console.log(req.user.todos)
   }
 );
 
@@ -207,6 +204,19 @@ router.delete(
     }
   );
 
+// route GET
+// GET a todolist
+// access private
+
+
+// router.get("/todolist",passport.authenticate("jwt", { session: false }),
+// (req, res) => {
+//     User.findOne({id : req.user.id})
+//     .then(user=>{
+//       res.json 
+//     })
+// }
+// );
 
 
 
