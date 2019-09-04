@@ -14,8 +14,8 @@ class TodoList extends Component {
   }
 
   componentDidMount(){
-    const todoData = fetchTodoList(this.props.auth.user.id)
-    console.log(todoData)
+   const todoData = fetchTodoList()
+   console.log(todoData)
   }
 
   render() {

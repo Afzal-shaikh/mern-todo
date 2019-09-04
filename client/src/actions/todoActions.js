@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-      GET_ERRORS,
+      GET_ERRORS, FETCH_TODOLIST,
   
   } from './types'
 
@@ -36,7 +36,11 @@ export const deleteTodo = id => dispatch => {
 export const fetchTodoList = id => dispatch => {
     axios 
     .get('/api/users/todolist')
-    .then(res=> {res.json(res.data); })
+    .then(res=> {res.json(res.data); 
+    dispatch({
+      type : FETCH_TODOLIST,
+      payload : res.data
+    })})
     .catch(err =>
         dispatch({
           type: GET_ERRORS,
