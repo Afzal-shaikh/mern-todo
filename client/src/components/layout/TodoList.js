@@ -9,6 +9,7 @@ class TodoList extends Component {
     this.state={
       todos:[]
     }
+    this.onDeleteClick = this.onDeleteClick.bind(this)
   }
 
   componentDidMount(){
@@ -32,7 +33,7 @@ class TodoList extends Component {
     .delete(`/todos/${id}`)
     .then(res =>
        console.log(res.data)
-      // window.location('/dashboard')
+      //  window.location('/dashboard')
        
        )
     .catch(err => 
