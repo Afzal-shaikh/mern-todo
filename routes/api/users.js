@@ -151,7 +151,7 @@ router.post(
 //  access Private
 
 router.delete(
-  "/todos/todo_id",
+  "/todos/:todo_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // User. find by email and delete 
