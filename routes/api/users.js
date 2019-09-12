@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
 
+
 // load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -87,8 +88,7 @@ router.post("/login", (req, res) => {
 
         const payload = {
           id: user.id,
-          name: user.name,
-          // todos: user.todos
+          name: user.name
         };
 
         // sign token
@@ -107,18 +107,19 @@ router.post("/login", (req, res) => {
 });
 
 // route GET api/users/todoList
-//  Return current user
+//  Return current users todolist
 //  access Private
 
-router.get(
-  "/todolist",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-     res.json({
-      todos: req.user.todos
-    });
-  }
-);
+router.get( "/todolist", passport.authenticate("jwt", { session: false }) ,
+  (req, res) => 
+     {
+      User.findOne({ email: req.user.email })
+      .then(user => res.json(user.todos));
+  
+     })
+
+
+
 
 // route POST api/users/add-todo
 //  add a todo-item
@@ -154,7 +155,7 @@ router.post(
 //  access Private
 
 router.delete(
-  "/todos/:todo_id",
+  "/todos/todo_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // User.findByIdAndDelete(req.user.id)

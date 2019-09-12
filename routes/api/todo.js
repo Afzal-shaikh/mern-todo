@@ -47,7 +47,7 @@ router.post("/add-todo",
 
 
 router.delete(
-    '/todos/:todo_id',
+    '/todos/todo_id',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
 

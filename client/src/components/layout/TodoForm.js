@@ -33,8 +33,10 @@ class TodoForm extends Component {
       content: this.state.content,
     };
 
-    this.props.addTodo(todoData,this.props.history);
+    this.props.addTodo(todoData , this.props.router);
     this.setState({content :''})
+
+    window.location.reload();
   }
 
   onChange(e) {
@@ -72,7 +74,8 @@ class TodoForm extends Component {
             </div>
           </div>
         </div>
-      </div>
+     </div>
+
     );
   }
 }
