@@ -17,7 +17,7 @@ class TodoList extends Component {
     return axios 
     .get('/api/users/todolist')
     .then(res=> {
-      console.log(res.data)
+      // console.log(res.data)
       this.setState ( {
         todos : res.data
       })
@@ -29,6 +29,7 @@ class TodoList extends Component {
   }
 
   onDeleteClick(id){
+    console.log(" Delete button clicked")
      axios
     .delete(`/todos/${id}`)
     .then(res =>
@@ -49,7 +50,7 @@ class TodoList extends Component {
         <td>{todo._id}</td>
         <td>
           <button
-             onClick={this.onDeleteClick( todo._id)}
+             onClick={() => {this.onDeleteClick(todo._id)}}
             className="btn btn-danger"
           >
             Delete

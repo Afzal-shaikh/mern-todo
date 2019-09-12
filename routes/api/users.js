@@ -110,20 +110,6 @@ router.post("/login", (req, res) => {
 //  Return current users todolist
 //  access Private
 
-router.get( "/todolist", passport.authenticate("jwt", { session: false }) ,
-  (req, res) => 
-     {
-      User.findOne({ email: req.user.email })
-      .then(user => res.json(user.todos));
-  
-     })
-
-
-
-
-// route POST api/users/add-todo
-//  add a todo-item
-//  access Private
 
 router.post(
   "/add-todo",
