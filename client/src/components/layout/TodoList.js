@@ -31,7 +31,7 @@ class TodoList extends Component {
   onDeleteClick(id){
     console.log(" Delete button clicked")
      axios
-    .delete(`/todos/${id}`)
+    .delete(`/api/users/todos/${id}`)
     .then(res =>
        console.log(res.data)
       //  window.location('/dashboard')

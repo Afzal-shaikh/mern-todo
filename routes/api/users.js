@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
 
-
 // load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -110,6 +109,17 @@ router.post("/login", (req, res) => {
 //  Return current users todolist
 //  access Private
 
+router.get(
+  "/todolist",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ email: req.user.email }).then(user => res.json(user.todos));
+  }
+);
+
+// route POST api/users/add-todo
+//  add a todo-item
+//  access Private
 
 router.post(
   "/add-todo",
@@ -144,8 +154,8 @@ router.delete(
   "/todos/todo_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // User.findByIdAndDelete(req.user.id)
-    User.findOne({ id: req.user.id })
+    // User. find by email and delete 
+    User.findOne({ email: req.user.email})
       .then(user => {
         // Get remove index
         const removeIndex = user.todos
@@ -162,17 +172,5 @@ router.delete(
   }
 );
 
-// route GET
-// GET a todolist
-// access private
-
-// router.get("/todolist",passport.authenticate("jwt", { session: false }),
-// (req, res) => {
-//     User.findOne({id : req.user.id})
-//     .then(user=>{
-//       res.json
-//     })
-// }
-// );
 
 module.exports = router;
